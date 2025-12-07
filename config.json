@@ -1,0 +1,11 @@
+{
+    "es_host": "http://localhost:9200",
+    "log_file_path": "ingest/sample.log",
+    "default_index_pattern": "*",
+    "default_ingest_index": "logs-sample",
+    "ingest_batch_size": 500,
+    "default_shards": 2,
+    "default_replicas": 1,
+    "default_refresh_interval": "30s",
+    "default_search_size": 10
+}

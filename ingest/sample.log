@@ -1,0 +1,50 @@
+{"@timestamp": "2025-12-06T14:52:24.878567", "level": "ERROR", "component": "auth", "message": "Cache miss", "response_time_ms": 285, "user_id": 2723}
+{"@timestamp": "2025-12-06T14:52:24.878608", "level": "DEBUG", "component": "payment", "message": "Payment processed", "response_time_ms": 369, "user_id": 6158}
+{"@timestamp": "2025-12-06T14:52:24.878622", "level": "WARN", "component": "auth", "message": "Page rendered", "response_time_ms": 412, "user_id": 7167}
+{"@timestamp": "2025-12-06T14:52:24.878631", "level": "ERROR", "component": "database", "message": "User logged in", "response_time_ms": 279, "user_id": 7241}
+{"@timestamp": "2025-12-06T14:52:24.878638", "level": "INFO", "component": "payment", "message": "Search query executed", "response_time_ms": 369, "user_id": 6803}
+{"@timestamp": "2025-12-06T14:52:24.878645", "level": "ERROR", "component": "payment", "message": "API request received", "response_time_ms": 305, "user_id": 9561}
+{"@timestamp": "2025-12-06T14:52:24.878651", "level": "ERROR", "component": "payment", "message": "User logged in", "response_time_ms": 322, "user_id": 6738}
+{"@timestamp": "2025-12-06T14:52:24.878657", "level": "INFO", "component": "auth", "message": "Database connection failed", "response_time_ms": 488, "user_id": 8491}
+{"@timestamp": "2025-12-06T14:52:24.878662", "level": "WARN", "component": "payment", "message": "Cache miss", "response_time_ms": 463, "user_id": 4463}
+{"@timestamp": "2025-12-06T14:52:24.878668", "level": "WARN", "component": "search", "message": "User logged in", "response_time_ms": 451, "user_id": 6870}
+{"@timestamp": "2025-12-06T14:52:24.878674", "level": "WARN", "component": "payment", "message": "Cache miss", "response_time_ms": 480, "user_id": 3410}
+{"@timestamp": "2025-12-06T14:52:24.878679", "level": "INFO", "component": "database", "message": "Page rendered", "response_time_ms": 308, "user_id": 1946}
+{"@timestamp": "2025-12-06T14:52:24.878685", "level": "ERROR", "component": "auth", "message": "API request received", "response_time_ms": 387, "user_id": 7322}
+{"@timestamp": "2025-12-06T14:52:24.878691", "level": "DEBUG", "component": "ui", "message": "Search query executed", "response_time_ms": 98, "user_id": 4760}
+{"@timestamp": "2025-12-06T14:52:24.878697", "level": "ERROR", "component": "auth", "message": "Database connection failed", "response_time_ms": 211, "user_id": 1943}
+{"@timestamp": "2025-12-06T14:52:24.878703", "level": "ERROR", "component": "database", "message": "API request received", "response_time_ms": 251, "user_id": 8505}
+{"@timestamp": "2025-12-06T14:52:24.878708", "level": "DEBUG", "component": "database", "message": "Page rendered", "response_time_ms": 155, "user_id": 6285}
+{"@timestamp": "2025-12-06T14:52:24.878717", "level": "ERROR", "component": "payment", "message": "User logged in", "response_time_ms": 345, "user_id": 8406}
+{"@timestamp": "2025-12-06T14:52:24.878722", "level": "ERROR", "component": "search", "message": "API request received", "response_time_ms": 144, "user_id": 1333}
+{"@timestamp": "2025-12-06T14:52:24.878731", "level": "DEBUG", "component": "database", "message": "API request received", "response_time_ms": 157, "user_id": 1032}
+{"@timestamp": "2025-12-06T14:52:24.878740", "level": "ERROR", "component": "auth", "message": "Cache miss", "response_time_ms": 355, "user_id": 9036}
+{"@timestamp": "2025-12-06T14:52:24.878748", "level": "ERROR", "component": "search", "message": "Page rendered", "response_time_ms": 425, "user_id": 8769}
+{"@timestamp": "2025-12-06T14:52:24.878754", "level": "WARN", "component": "search", "message": "Search query executed", "response_time_ms": 369, "user_id": 2490}
+{"@timestamp": "2025-12-06T14:52:24.878770", "level": "WARN", "component": "search", "message": "Cache miss", "response_time_ms": 213, "user_id": 7917}
+{"@timestamp": "2025-12-06T14:52:24.878776", "level": "ERROR", "component": "payment", "message": "Payment processed", "response_time_ms": 187, "user_id": 7047}
+{"@timestamp": "2025-12-06T14:52:24.878781", "level": "ERROR", "component": "auth", "message": "Database connection failed", "response_time_ms": 300, "user_id": 8022}
+{"@timestamp": "2025-12-06T14:52:24.878787", "level": "WARN", "component": "ui", "message": "Search query executed", "response_time_ms": 131, "user_id": 5041}
+{"@timestamp": "2025-12-06T14:52:24.878793", "level": "DEBUG", "component": "payment", "message": "Cache miss", "response_time_ms": 161, "user_id": 9951}
+{"@timestamp": "2025-12-06T14:52:24.878799", "level": "ERROR", "component": "search", "message": "Page rendered", "response_time_ms": 149, "user_id": 3468}
+{"@timestamp": "2025-12-06T14:52:24.878804", "level": "ERROR", "component": "auth", "message": "Cache miss", "response_time_ms": 175, "user_id": 8063}
+{"@timestamp": "2025-12-06T14:52:24.878810", "level": "WARN", "component": "ui", "message": "User logged in", "response_time_ms": 370, "user_id": 8406}
+{"@timestamp": "2025-12-06T14:52:24.878815", "level": "ERROR", "component": "auth", "message": "User logged in", "response_time_ms": 19, "user_id": 6511}
+{"@timestamp": "2025-12-06T14:52:24.878821", "level": "INFO", "component": "payment", "message": "Search query executed", "response_time_ms": 456, "user_id": 6666}
+{"@timestamp": "2025-12-06T14:52:24.878827", "level": "INFO", "component": "database", "message": "Search query executed", "response_time_ms": 404, "user_id": 3854}
+{"@timestamp": "2025-12-06T14:52:24.878832", "level": "INFO", "component": "auth", "message": "Page rendered", "response_time_ms": 93, "user_id": 9707}
+{"@timestamp": "2025-12-06T14:52:24.878838", "level": "ERROR", "component": "auth", "message": "Cache miss", "response_time_ms": 424, "user_id": 4174}
+{"@timestamp": "2025-12-06T14:52:24.878845", "level": "ERROR", "component": "auth", "message": "User logged in", "response_time_ms": 177, "user_id": 6674}
+{"@timestamp": "2025-12-06T14:52:24.878851", "level": "DEBUG", "component": "search", "message": "Search query executed", "response_time_ms": 77, "user_id": 8004}
+{"@timestamp": "2025-12-06T14:52:24.878857", "level": "DEBUG", "component": "database", "message": "API request received", "response_time_ms": 231, "user_id": 1483}
+{"@timestamp": "2025-12-06T14:52:24.878863", "level": "INFO", "component": "search", "message": "Search query executed", "response_time_ms": 471, "user_id": 4860}
+{"@timestamp": "2025-12-06T14:52:24.878869", "level": "WARN", "component": "auth", "message": "Page rendered", "response_time_ms": 410, "user_id": 8217}
+{"@timestamp": "2025-12-06T14:52:24.878875", "level": "WARN", "component": "ui", "message": "Payment processed", "response_time_ms": 74, "user_id": 8524}
+{"@timestamp": "2025-12-06T14:52:24.878880", "level": "WARN", "component": "auth", "message": "Database connection failed", "response_time_ms": 93, "user_id": 8050}
+{"@timestamp": "2025-12-06T14:52:24.878886", "level": "WARN", "component": "auth", "message": "Page rendered", "response_time_ms": 411, "user_id": 8934}
+{"@timestamp": "2025-12-06T14:52:24.878891", "level": "DEBUG", "component": "search", "message": "Cache miss", "response_time_ms": 461, "user_id": 8231}
+{"@timestamp": "2025-12-06T14:52:24.878897", "level": "ERROR", "component": "database", "message": "Page rendered", "response_time_ms": 384, "user_id": 6662}
+{"@timestamp": "2025-12-06T14:52:24.878902", "level": "WARN", "component": "search", "message": "Search query executed", "response_time_ms": 461, "user_id": 4499}
+{"@timestamp": "2025-12-06T14:52:24.878908", "level": "INFO", "component": "ui", "message": "Search query executed", "response_time_ms": 178, "user_id": 8746}
+{"@timestamp": "2025-12-06T14:52:24.878913", "level": "INFO", "component": "ui", "message": "Cache miss", "response_time_ms": 21, "user_id": 3217}
+{"@timestamp": "2025-12-06T14:52:24.878919", "level": "WARN", "component": "payment", "message": "Payment processed", "response_time_ms": 143, "user_id": 4875}

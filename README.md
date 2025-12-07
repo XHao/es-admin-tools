@@ -2,6 +2,25 @@
 
 This directory contains Python scripts to help with common daily operations for an Elasticsearch cluster. These scripts are designed to be lightweight and use only the standard Python library (no `pip install` required).
 
+## Directory Structure
+
+```
+daily_ops_scripts/
+├── monitor/
+│   └── check_cluster_health.py
+├── indices/
+│   ├── manage_indices.py
+│   └── create_update_index.py
+├── ingest/
+│   └── ingest_logs.py
+├── search/
+│   └── search_index.py
+├── utils.py
+├── ops.py  <-- Main Entrypoint
+├── config.json <-- Configuration File
+└── README.md
+```
+
 ## Prerequisites
 
 - Python 3.x installed.
@@ -9,108 +28,85 @@ This directory contains Python scripts to help with common daily operations for 
 
 ## Configuration
 
-All scripts have a global variable `ES_HOST` at the top of the file.
-```python
-ES_HOST = "http://localhost:9200"
+Configuration is managed via `config.json`. You can modify this file to change the Elasticsearch host, log file paths, etc.
+
+**Example `config.json`:**
+```json
+{
+    "es_host": "http://localhost:9200",
+    "log_file_path": "ingest/sample.log",
+    "default_index_pattern": "*"
+}
 ```
-If your cluster is running on a different host or port, please update this variable in the respective script.
 
 ---
 
-## 1. Check Cluster Health (`check_cluster_health.py`)
+## Main Entrypoint: `ops.py`
 
-This script provides a quick overview of the cluster's health and the status of its nodes.
+The `ops.py` script serves as a single entrypoint for all operations.
 
-### Usage
+### 1. Check Cluster Health
+
 ```bash
-python3 check_cluster_health.py
+python3 ops.py health
 ```
 
-### Output
-- **Cluster Health**: Status (Green/Yellow/Red), node counts, and shard information.
-- **Nodes Info**: A table listing nodes, their roles, IP addresses, CPU usage, Heap usage, and Load.
-
----
-
-## 2. Manage Indices (`manage_indices.py`)
-
-This script allows you to list, delete, close, and open indices.
-
-### Usage
+### 2. Manage Indices
 
 **List Indices**
-List all indices or filter by a pattern.
 ```bash
-# List all indices
-python3 manage_indices.py list
-
-# List indices matching a pattern (e.g., "log*")
-python3 manage_indices.py list --index "log*"
+python3 ops.py indices list
+python3 ops.py indices list --pattern "log*"
 ```
-
-**Delete an Index**
-Permanently remove an index.
-```bash
-python3 manage_indices.py delete --index my-index-name
-```
-*Note: You will be prompted to confirm the deletion.*
-
-**Close an Index**
-Close an index to save memory (it becomes read/write blocked but remains on disk).
-```bash
-python3 manage_indices.py close --index my-index-name
-```
-
-**Open an Index**
-Re-open a closed index.
-```bash
-python3 manage_indices.py open --index my-index-name
-```
-
----
-
-## 3. Ingest Logs (`ingest_logs.py`)
-
-This script demonstrates how to ingest data into the cluster. It reads a sample log file (`../tools/log-ingester/sample.log`) and indexes the documents into an index named `logs-sample`.
-
-### Usage
-```bash
-python3 ingest_logs.py
-```
-
-### Details
-- **Source File**: `../tools/log-ingester/sample.log`
-- **Target Index**: `logs-sample`
-- **Method**: Uses the Elasticsearch `_bulk` API for efficient ingestion.
-
----
-
-## 4. Create and Update Index (`create_update_index.py`)
-
-This script demonstrates how to create an index with custom settings and mappings, and how to update them later.
-
-### Usage
 
 **Create Index**
-Creates an index named `my-custom-index` (default) with a custom analyzer and initial mapping.
 ```bash
-python3 create_update_index.py create
+python3 ops.py indices create --name "my-index"
 ```
 
-**Update Mapping**
-Adds new fields (`category`, `tags`) to the existing index mapping.
+**Index Details**
 ```bash
-python3 create_update_index.py update_mapping
+python3 ops.py indices details --name "my-index"
 ```
 
-**Update Settings**
-Updates dynamic settings (e.g., `refresh_interval`) for the index.
+**Delete Index**
 ```bash
-python3 create_update_index.py update_settings
+python3 ops.py indices delete --name "my-index"
 ```
 
-**Custom Index Name**
-You can specify a custom index name for any action:
+**Close/Open Index**
 ```bash
-python3 create_update_index.py create --index my-blog-index
+python3 ops.py indices close --name "my-index"
+python3 ops.py indices open --name "my-index"
 ```
+
+### 3. Ingest Logs
+
+```bash
+python3 ops.py ingest --index "logs-prod"
+```
+
+### 4. Search Index
+
+```bash
+# Search all documents (default size 10)
+python3 ops.py search --index "logs-prod"
+
+# Search with query string
+python3 ops.py search --index "logs-prod" --query "status:error"
+
+# Search with custom size
+python3 ops.py search --index "logs-prod" --size 50
+```
+
+---
+
+## Individual Scripts (Legacy Usage)
+
+You can still run the individual scripts directly if needed.
+
+- **Monitor**: `python3 monitor/check_cluster_health.py`
+- **Indices**: `python3 indices/manage_indices.py list`
+- **Ingest**: `python3 ingest/ingest_logs.py`
+- **Search**: `python3 search/search_index.py --index "my-index"`
+

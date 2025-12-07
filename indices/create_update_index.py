@@ -1,20 +1,20 @@
-import urllib.request
-import urllib.error
-import json
 import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import utils
+import json
 import argparse
 
-ES_HOST = "http://localhost:9200"
-
 def create_custom_index(index_name):
-    url = f"{ES_HOST}/{index_name}"
-    
     # Define custom settings and mappings
     # Example: A blog post index with custom analyzer
+    shards = utils.CONFIG.get("default_shards", 2)
+    replicas = utils.CONFIG.get("default_replicas", 1)
+    
     payload = {
         "settings": {
-            "number_of_shards": 2,
-            "number_of_replicas": 1,
+            "number_of_shards": shards,
+            "number_of_replicas": replicas,
             "analysis": {
                 "analyzer": {
                     "my_custom_analyzer": {
@@ -45,23 +45,15 @@ def create_custom_index(index_name):
         }
     }
     
-    data = json.dumps(payload).encode('utf-8')
-    req = urllib.request.Request(url, data=data, headers={'Content-Type': 'application/json'}, method='PUT')
-    
-    try:
-        with urllib.request.urlopen(req) as response:
-            print(f"Index '{index_name}' created successfully.")
-            print(json.load(response))
-    except urllib.error.HTTPError as e:
-        print(f"Failed to create index '{index_name}': {e}")
-        print(e.read().decode())
-    except Exception as e:
-        print(f"Error: {e}")
+    data = utils.make_request(index_name, method='PUT', data=payload)
+    if data and 'acknowledged' in data:
+        print(f"Index '{index_name}' created successfully.")
+        print(json.dumps(data, indent=4))
+    else:
+        print(f"Failed to create index '{index_name}'.")
 
 def update_index_mapping(index_name):
     # Add new fields 'category' and 'tags' to the existing mapping
-    url = f"{ES_HOST}/{index_name}/_mapping"
-    
     payload = {
         "properties": {
             "category": {
@@ -79,55 +71,36 @@ def update_index_mapping(index_name):
         }
     }
     
-    data = json.dumps(payload).encode('utf-8')
-    req = urllib.request.Request(url, data=data, headers={'Content-Type': 'application/json'}, method='PUT')
-    
-    try:
-        with urllib.request.urlopen(req) as response:
-            print(f"Index '{index_name}' mapping updated successfully.")
-            print(json.load(response))
-    except urllib.error.HTTPError as e:
-        print(f"Failed to update mapping for '{index_name}': {e}")
-        print(e.read().decode())
-    except Exception as e:
-        print(f"Error: {e}")
+    data = utils.make_request(f"{index_name}/_mapping", method='PUT', data=payload)
+    if data and 'acknowledged' in data:
+        print(f"Index '{index_name}' mapping updated successfully.")
+        print(json.dumps(data, indent=4))
+    else:
+        print(f"Failed to update mapping for '{index_name}'.")
 
 def update_index_settings(index_name):
     # Update dynamic settings, e.g., refresh_interval
-    url = f"{ES_HOST}/{index_name}/_settings"
-    
+    refresh_interval = utils.CONFIG.get("default_refresh_interval", "30s")
     payload = {
         "index": {
-            "refresh_interval": "30s"
+            "refresh_interval": refresh_interval
         }
     }
     
-    data = json.dumps(payload).encode('utf-8')
-    req = urllib.request.Request(url, data=data, headers={'Content-Type': 'application/json'}, method='PUT')
-    
-    try:
-        with urllib.request.urlopen(req) as response:
-            print(f"Index '{index_name}' settings updated successfully.")
-            print(json.load(response))
-    except urllib.error.HTTPError as e:
-        print(f"Failed to update settings for '{index_name}': {e}")
-        print(e.read().decode())
-    except Exception as e:
-        print(f"Error: {e}")
+    data = utils.make_request(f"{index_name}/_settings", method='PUT', data=payload)
+    if data and 'acknowledged' in data:
+        print(f"Index '{index_name}' settings updated successfully.")
+        print(json.dumps(data, indent=4))
+    else:
+        print(f"Failed to update settings for '{index_name}'.")
 
 def get_index_details(index_name):
-    url = f"{ES_HOST}/{index_name}"
-    
-    try:
-        with urllib.request.urlopen(url) as response:
-            print(f"Details for index '{index_name}':")
-            data = json.load(response)
-            print(json.dumps(data, indent=4))
-    except urllib.error.HTTPError as e:
-        print(f"Failed to get details for index '{index_name}': {e}")
-        print(e.read().decode())
-    except Exception as e:
-        print(f"Error: {e}")
+    data = utils.make_request(index_name)
+    if data:
+        print(f"Details for index '{index_name}':")
+        print(json.dumps(data, indent=4))
+    else:
+        print(f"Failed to get details for index '{index_name}'.")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Create and Update Custom Index")
