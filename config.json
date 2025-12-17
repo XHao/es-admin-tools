@@ -1,5 +1,7 @@
 {
     "es_host": "http://localhost:9200",
+    "es_username": "elastic",
+    "es_password": "password",
     "log_file_path": "ingest/sample.log",
     "default_index_pattern": "*",
     "default_ingest_index": "logs-sample",

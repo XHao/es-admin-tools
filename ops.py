@@ -6,7 +6,7 @@ import os
 # Ensure the current directory is in sys.path so we can import modules
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-from monitor import check_cluster_health
+from monitor import check_cluster_health, cluster_diagnostics
 from indices import manage_indices, create_update_index
 from ingest import ingest_logs
 from search import search_index
@@ -14,6 +14,9 @@ from search import search_index
 def handle_health(args):
     check_cluster_health.get_cluster_health()
     check_cluster_health.get_nodes_info()
+
+def handle_diagnose(args):
+    cluster_diagnostics.run_diagnostics()
 
 def handle_search(args):
     search_index.search_index(args.index, args.query, args.size)
@@ -52,6 +55,10 @@ def main():
     # Health Command
     health_parser = subparsers.add_parser("health", help="Check cluster health and nodes info")
     health_parser.set_defaults(func=handle_health)
+
+    # Diagnose Command
+    diagnose_parser = subparsers.add_parser("diagnose", help="Run comprehensive cluster diagnostics")
+    diagnose_parser.set_defaults(func=handle_diagnose)
 
     # Indices Command
     indices_parser = subparsers.add_parser("indices", help="Manage indices (list, delete, create, etc.)")

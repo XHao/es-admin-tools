@@ -3,6 +3,7 @@ import urllib.error
 import json
 import sys
 import os
+import base64
 
 # Load configuration
 CONFIG_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'config.json')
@@ -45,6 +46,14 @@ def make_request(endpoint, method='GET', data=None, headers=None):
         data = json.dumps(data).encode('utf-8')
     elif data is not None and isinstance(data, str):
         data = data.encode('utf-8')
+
+    # Add Basic Auth if credentials are provided
+    username = CONFIG.get("es_username")
+    password = CONFIG.get("es_password")
+    if username and password:
+        auth_str = f"{username}:{password}"
+        b64_auth_str = base64.b64encode(auth_str.encode('utf-8')).decode('utf-8')
+        headers['Authorization'] = f"Basic {b64_auth_str}"
 
     req = urllib.request.Request(url, data=data, headers=headers, method=method)
 
