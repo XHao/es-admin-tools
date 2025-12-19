@@ -6,7 +6,14 @@ import argparse
 import json
 from urllib.parse import quote
 
-DEFAULT_SIZE = utils.CONFIG.get("default_search_size", 10)
+def _coerce_int(value, default):
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return default
+
+
+DEFAULT_SIZE = _coerce_int(utils.CONFIG.get("default_search_size", 10), 10)
 
 def search_index(index_name, query=None, size=DEFAULT_SIZE):
     endpoint = f"{index_name}/_search"

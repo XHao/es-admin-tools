@@ -5,10 +5,17 @@ import utils
 import json
 import argparse
 
+
+def _coerce_int(value, default):
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return default
+
 INDEX_NAME = utils.CONFIG.get("default_ingest_index", "logs-sample")
 # Use configured path or fallback to default relative path
-LOG_FILE_PATH = utils.CONFIG.get("log_file_path", "../../tools/log-ingester/sample.log")
-BATCH_SIZE = utils.CONFIG.get("ingest_batch_size", 500)
+LOG_FILE_PATH = utils.CONFIG.get("log_file_path", "./sample.log")
+BATCH_SIZE = _coerce_int(utils.CONFIG.get("ingest_batch_size", 500), 500)
 
 def ingest_logs(index_name=INDEX_NAME):
     # Resolve absolute path

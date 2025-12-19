@@ -48,7 +48,11 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="Manage Elasticsearch Indices")
     parser.add_argument("action", choices=["list", "delete", "close", "open"], help="Action to perform")
-    parser.add_argument("--index", help="Index name (required for delete, close, open)", default="*")
+    parser.add_argument(
+        "--index",
+        help="Index pattern for list, or index name for delete/close/open (default from config.json)",
+        default=DEFAULT_PATTERN,
+    )
     
     args = parser.parse_args()
 

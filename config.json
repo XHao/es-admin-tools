@@ -9,5 +9,74 @@
     "default_shards": 2,
     "default_replicas": 1,
     "default_refresh_interval": "30s",
-    "default_search_size": 10
+    "default_search_size": 10,
+    "translog_control": {
+        "request": {
+            "enabled": true,
+            "durability": "request"
+        },
+        "async": {
+            "enabled": true,
+            "durability": "async",
+            "sync_interval": "30s"
+        },
+        "disable": {
+            "enabled": false
+        }
+    },
+    "create_update_index": {
+        "create": {
+            "analysis": {
+                "analyzer": {
+                    "my_custom_analyzer": {
+                        "type": "custom",
+                        "tokenizer": "standard",
+                        "filter": [
+                            "lowercase",
+                            "stop"
+                        ]
+                    }
+                }
+            },
+            "mappings": {
+                "properties": {
+                    "title": {
+                        "type": "text",
+                        "analyzer": "my_custom_analyzer"
+                    },
+                    "content": {
+                        "type": "text",
+                        "analyzer": "standard"
+                    },
+                    "created_at": {
+                        "type": "date"
+                    },
+                    "views": {
+                        "type": "integer"
+                    }
+                }
+            }
+        },
+        "update_mapping": {
+            "properties": {
+                "category": {
+                    "type": "keyword"
+                },
+                "tags": {
+                    "type": "text",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                }
+            }
+        },
+        "update_settings": {
+            "index": {
+                "refresh_interval": "30s"
+            }
+        }
+    }
 }

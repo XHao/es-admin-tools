@@ -39,6 +39,8 @@ Configuration is managed via `config.json`. You can modify this file to change t
 }
 ```
 
+The legacy index helper script `indices/create_update_index.py` also reads its index creation and update payloads from `config.json` under the `create_update_index` key.
+
 ---
 
 ## Main Entrypoint: `ops.py`
@@ -49,6 +51,31 @@ The `ops.py` script serves as a single entrypoint for all operations.
 
 ```bash
 python3 ops.py health
+```
+
+### Check Translog Stats
+
+```bash
+# Node-level translog stats
+python3 ops.py translog
+
+# Node-level + shard-level translog stats for an index
+python3 ops.py translog --index "logs-sample"
+```
+
+### Enable/Disable Translog
+
+This toggles `index.translog.enabled` for an index (and can also set `index.translog.durability` / `index.translog.sync_interval`). Disabling translog can affect durability and recovery; use with care.
+
+```bash
+# Enabled + safest durability
+python3 ops.py translog-mode request --index "logs-sample"
+
+# Enabled + async fsync (less durable)
+python3 ops.py translog-mode async --index "logs-sample"
+
+# Disable translog (confirmation prompt)
+python3 ops.py translog-mode disable --index "logs-sample"
 ```
 
 ### 2. Manage Indices
